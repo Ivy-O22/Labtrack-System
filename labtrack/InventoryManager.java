@@ -223,16 +223,64 @@ public class InventoryManager {
     }
 
     public void loadFromFile() {
-        try (Reader reader = new FileReader("equipment.json")) {
-            TrackableEquipment[] equipments = gson.fromJson(reader, TrackableEquipment[].class);
-            if (equipments != null) {
-                equipmentList = new ArrayList<>(Arrays.asList(equipments));
-                System.out.println("Loaded " + equipments.length + " equipment(s).");
+        Reader reader = null;
+        try {
+            File file = new File("equipment.json");
+
+            if (!file.exists()) {
+                System.out.println("No saved data found. Starting with empty inventory.");
+                return;
             }
+
+            if (!file.canRead()) {
+                System.out.println("Error: Cannot read file. Check permissions.");
+                return;
+            }
+
+            if (file.length() == 0) {
+                System.out.println("Warning: Data file is empty. Starting fresh.");
+                return;
+            }
+
+            reader = new FileReader(file);
+            TrackableEquipment[] equipments = gson.fromJson(reader, TrackableEquipment[].class);
+
+            if (equipments == null || equipments.length == 0) {
+                System.out.println("No equipment data found in file.");
+                equipmentList = new ArrayList<>();
+            } else {
+                equipmentList = new ArrayList<>(Arrays.asList(equipments));
+                System.out.println("Successfully loaded " + equipments.length + " equipment(s).");
+            }
+
         } catch (FileNotFoundException e) {
-            System.out.println("No saved data. Starting fresh.");
+            System.out.println("Data file not found. Starting with empty inventory.");
+            equipmentList = new ArrayList<>();
+
+        } catch (com.google.gson.JsonSyntaxException e) {
+            System.out.println("Error: Invalid JSON format in data file.");
+            System.out.println("The file may be corrupted.");
+            e.printStackTrace();
+            equipmentList = new ArrayList<>();
+
         } catch (IOException e) {
-            System.out.println("Error loading: " + e.getMessage());
+            System.out.println("Error reading data file: " + e.getMessage());
+            e.printStackTrace();
+            equipmentList = new ArrayList<>();
+
+        } catch (Exception e) {
+            System.out.println("Unexpected error loading data: " + e.getMessage());
+            e.printStackTrace();
+            equipmentList = new ArrayList<>();
+
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Error closing file reader: " + e.getMessage());
+                }
+            }
         }
     }
 }
