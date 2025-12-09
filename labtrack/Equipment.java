@@ -19,7 +19,7 @@ public abstract class Equipment {
         this.damagedQuantity = 0;
         updateStatus();
     }
-    //THIS IS A TEST
+// THIS IS A COMMIT TESTING
 
     // Simple getters
     public String getEquipmentId() { return equipmentId; }
