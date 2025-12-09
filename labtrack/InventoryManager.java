@@ -29,8 +29,7 @@ public class InventoryManager {
             System.out.println("Equipment added successfully!");
 
         } catch (Exception e) {
-            System.out.println("Error adding equipment: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error adding equipment: " + e.getMessage());;
         }
     }
 
@@ -77,8 +76,7 @@ public class InventoryManager {
             }
 
         } catch (Exception e) {
-            System.out.println("Error during search: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error during search: " + e.getMessage());;
         }
     }
 
@@ -114,8 +112,7 @@ public class InventoryManager {
             }
 
         } catch (Exception e) {
-            System.out.println("Error filtering by status: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error filtering by status: " + e.getMessage());;
         }
     }
 
@@ -151,8 +148,7 @@ public class InventoryManager {
             }
 
         } catch (Exception e) {
-            System.out.println("Error filtering by category: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error filtering by category: " + e.getMessage());;
         }
     }
 
@@ -178,8 +174,7 @@ public class InventoryManager {
             System.out.println("Total: " + validCount + " equipment(s)");
 
         } catch (Exception e) {
-            System.out.println("Error viewing equipment: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error viewing equipment: " + e.getMessage());;
         }
     }
 
@@ -205,12 +200,10 @@ public class InventoryManager {
 
         } catch (IOException e) {
             System.out.println("Error saving data: " + e.getMessage());
-            System.out.println("Check if you have write permissions.");
-            e.printStackTrace();
+            System.out.println("Check if you have write permissions.");;
 
         } catch (Exception e) {
-            System.out.println("Unexpected error during save: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Unexpected error during save: " + e.getMessage());;
         } finally {
             if (writer != null) {
                 try {
@@ -259,18 +252,15 @@ public class InventoryManager {
 
         } catch (com.google.gson.JsonSyntaxException e) {
             System.out.println("Error: Invalid JSON format in data file.");
-            System.out.println("The file may be corrupted.");
-            e.printStackTrace();
+            System.out.println("The file may be corrupted.");;
             equipmentList = new ArrayList<>();
 
         } catch (IOException e) {
-            System.out.println("Error reading data file: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Error reading data file: " + e.getMessage());;
             equipmentList = new ArrayList<>();
 
         } catch (Exception e) {
-            System.out.println("Unexpected error loading data: " + e.getMessage());
-            e.printStackTrace();
+            System.out.println("Unexpected error loading data: " + e.getMessage());;
             equipmentList = new ArrayList<>();
 
         } finally {
