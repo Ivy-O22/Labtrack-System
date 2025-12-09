@@ -9,9 +9,30 @@ public class InventoryManager {
     private Gson gson = new Gson();
 
     public void addEquipment(TrackableEquipment equipment) {
-        equipmentList.add(equipment);
-        saveToFile();
-        System.out.println("Equipment added!");
+        try {
+            // Validate input
+            if (equipment == null) {
+                System.out.println("Error: Cannot add null equipment.");
+                return;
+            }
+
+            for (TrackableEquipment eq : equipmentList) {
+                if (eq.getEquipmentId() != null &&
+                        eq.getEquipmentId().equalsIgnoreCase(equipment.getEquipmentId())) {
+                    System.out.println("Error: Equipment with ID '" +
+                            equipment.getEquipmentId() + "' already exists.");
+                    return;
+                }
+            }
+
+            equipmentList.add(equipment);
+            saveToFile();
+            System.out.println("Equipment added successfully!");
+
+        } catch (Exception e) {
+            System.out.println("Error adding equipment: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public List<TrackableEquipment> getAllEquipment() {
