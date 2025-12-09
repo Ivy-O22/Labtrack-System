@@ -184,11 +184,41 @@ public class InventoryManager {
     }
 
     public void saveToFile() {
-        try (Writer writer = new FileWriter("equipment.json")) {
+        Writer writer = null;
+        try {
+            if (equipmentList == null) {
+                System.out.println("Error: Equipment list is null, cannot save.");
+                return;
+            }
+
+            File file = new File("equipment.json");
+            if (file.exists()) {
+                File backup = new File("equipment.json.backup");
+                if (file.renameTo(backup)) {
+                    System.out.println("Backup created.");
+                }
+            }
+
+            writer = new FileWriter("equipment.json");
             gson.toJson(equipmentList, writer);
-            System.out.println("Saved!");
+            System.out.println("Data saved successfully!");
+
         } catch (IOException e) {
-            System.out.println("Error saving: " + e.getMessage());
+            System.out.println("Error saving data: " + e.getMessage());
+            System.out.println("Check if you have write permissions.");
+            e.printStackTrace();
+
+        } catch (Exception e) {
+            System.out.println("Unexpected error during save: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    System.out.println("Error closing file writer: " + e.getMessage());
+                }
+            }
         }
     }
 
