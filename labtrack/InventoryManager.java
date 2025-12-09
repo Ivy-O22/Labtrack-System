@@ -83,15 +83,42 @@ public class InventoryManager {
     }
 
     public void filterByStatus(String status) {
-        boolean found = false;
-        for (TrackableEquipment eq : equipmentList) {
-            if (eq.getStatus().equalsIgnoreCase(status)) {
-                eq.displayInfo();
-                found = true;
+        try {
+            if (status == null || status.trim().isEmpty()) {
+                System.out.println("Error: Status filter cannot be empty.");
+                return;
             }
+
+            if (equipmentList.isEmpty()) {
+                System.out.println("No equipment in inventory to filter.");
+                return;
+            }
+
+            boolean found = false;
+            String trimmedStatus = status.trim();
+
+            for (TrackableEquipment eq : equipmentList) {
+                if (eq == null) continue;
+
+                String equipmentStatus = eq.getStatus();
+
+                if (equipmentStatus != null &&
+                        equipmentStatus.equalsIgnoreCase(trimmedStatus)) {
+                    eq.displayInfo();
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("No equipment found with status: " + trimmedStatus);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error filtering by status: " + e.getMessage());
+            e.printStackTrace();
         }
-        if (!found) System.out.println("No equipment with that status.");
     }
+
 
     public void filterByCategory(String category) {
         boolean found = false;
