@@ -119,16 +119,41 @@ public class InventoryManager {
         }
     }
 
-
     public void filterByCategory(String category) {
-        boolean found = false;
-        for (TrackableEquipment eq : equipmentList) {
-            if (eq.getCategory().equalsIgnoreCase(category)) {
-                eq.displayInfo();
-                found = true;
+        try {
+            if (category == null || category.trim().isEmpty()) {
+                System.out.println("Error: Category filter cannot be empty.");
+                return;
             }
+
+            if (equipmentList.isEmpty()) {
+                System.out.println("No equipment in inventory to filter.");
+                return;
+            }
+
+            boolean found = false;
+            String trimmedCategory = category.trim();
+
+            for (TrackableEquipment eq : equipmentList) {
+                if (eq == null) continue;
+
+                String equipmentCategory = eq.getCategory();
+
+                if (equipmentCategory != null &&
+                        equipmentCategory.equalsIgnoreCase(trimmedCategory)) {
+                    eq.displayInfo();
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("No equipment found in category: " + trimmedCategory);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error filtering by category: " + e.getMessage());
+            e.printStackTrace();
         }
-        if (!found) System.out.println("No equipment in that category.");
     }
 
     public void viewAllEquipment() {
