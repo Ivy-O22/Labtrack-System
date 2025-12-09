@@ -10,7 +10,6 @@ public class InventoryManager {
 
     public void addEquipment(TrackableEquipment equipment) {
         try {
-            // Validate input
             if (equipment == null) {
                 System.out.println("Error: Cannot add null equipment.");
                 return;
@@ -36,19 +35,51 @@ public class InventoryManager {
     }
 
     public List<TrackableEquipment> getAllEquipment() {
-        return equipmentList;
+        try {
+
+            return new ArrayList<>(equipmentList);
+        } catch (Exception e) {
+            System.out.println("Error retrieving equipment list: " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public void searchEquipment(String keyword) {
-        boolean found = false;
-        for (TrackableEquipment eq : equipmentList) {
-            if (eq.getName().equalsIgnoreCase(keyword) ||
-                    eq.getEquipmentId().equalsIgnoreCase(keyword)) {
-                eq.displayInfo();
-                found = true;
+        try {
+            if (keyword == null || keyword.trim().isEmpty()) {
+                System.out.println("Error: Search keyword cannot be empty.");
+                return;
             }
+
+            if (equipmentList.isEmpty()) {
+                System.out.println("No equipment in inventory to search.");
+                return;
+            }
+
+            boolean found = false;
+            String trimmedKeyword = keyword.trim();
+
+            for (TrackableEquipment eq : equipmentList) {
+                if (eq == null) continue;
+
+                String name = eq.getName();
+                String id = eq.getEquipmentId();
+
+                if ((name != null && name.equalsIgnoreCase(trimmedKeyword)) ||
+                        (id != null && id.equalsIgnoreCase(trimmedKeyword))) {
+                    eq.displayInfo();
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                System.out.println("No equipment found matching: " + trimmedKeyword);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error during search: " + e.getMessage());
+            e.printStackTrace();
         }
-        if (!found) System.out.println("Not found.");
     }
 
     public void filterByStatus(String status) {
