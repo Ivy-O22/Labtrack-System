@@ -157,12 +157,29 @@ public class InventoryManager {
     }
 
     public void viewAllEquipment() {
-        if (equipmentList.isEmpty()) {
-            System.out.println("No equipment available.");
-        } else {
-            for (TrackableEquipment eq : equipmentList) {
-                eq.displayInfo();
+        try {
+            if (equipmentList == null || equipmentList.isEmpty()) {
+                System.out.println("No equipment available in inventory.");
+                return;
             }
+
+            System.out.println("=== All Equipment ===");
+            int validCount = 0;
+
+            for (TrackableEquipment eq : equipmentList) {
+                if (eq != null) {
+                    eq.displayInfo();
+                    validCount++;
+                } else {
+                    System.out.println("Warning: Null equipment entry detected.");
+                }
+            }
+
+            System.out.println("Total: " + validCount + " equipment(s)");
+
+        } catch (Exception e) {
+            System.out.println("Error viewing equipment: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
