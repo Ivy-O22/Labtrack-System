@@ -19,6 +19,7 @@ public abstract class Equipment {
         this.damagedQuantity = 0;
         updateStatus();
     }
+    //THIS IS A TEST
 
     // Simple getters
     public String getEquipmentId() { return equipmentId; }
