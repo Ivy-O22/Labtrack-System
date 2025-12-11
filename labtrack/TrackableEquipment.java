@@ -174,7 +174,6 @@ public class TrackableEquipment extends Equipment implements Trackable {
                 return false;
             }
 
-            // Perform the damage marking operation
             addDamaged(quantity);
             borrowers.put(user, borrowers.get(user) - quantity);
             if (borrowers.get(user) == 0) borrowers.remove(user);
