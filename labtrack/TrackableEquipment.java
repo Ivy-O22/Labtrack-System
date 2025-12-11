@@ -173,7 +173,7 @@ public class TrackableEquipment extends Equipment implements Trackable {
 
             // Validate date format
             if (!isValidDateFormat(date)) {
-                System.out.println("Error: Invalid date format. Expected format: YYYY-MM-DD or MM/DD/YYYY.");
+                System.out.println("Error: Invalid date format. Expected format: YYYY-MM-DD.");
                 return false;
             }
 
