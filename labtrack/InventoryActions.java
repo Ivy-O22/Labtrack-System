@@ -57,7 +57,7 @@ public class InventoryActions {
             return;
         }
 
-        // Validate user name - we need to know who borrowed it
+        // Validate username - we need to know who borrowed it
         if (user == null || user.trim().isEmpty()) {
             System.out.println("Error: User name cannot be empty.");
             return;
@@ -99,7 +99,7 @@ public class InventoryActions {
             return;
         }
 
-        // Validate user name - need to match with borrow record
+        // Validate username - need to match with borrow record
         if (user == null || user.trim().isEmpty()) {
             System.out.println("Error: User name cannot be empty.");
             return;
@@ -140,7 +140,7 @@ public class InventoryActions {
             return;
         }
 
-        // Validate user name - need to know who reported/caused the damage
+        // Validate username - need to know who reported/caused the damage
         if (user == null || user.trim().isEmpty()) {
             System.out.println("Error: User name cannot be empty.");
             return;
