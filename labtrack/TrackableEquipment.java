@@ -2,7 +2,7 @@ package labtrack;
 
 import java.util.*;
 
-public class TrackableEquipment extends Equipment implements EquipmentOperations {
+public class TrackableEquipment extends Equipment implements Trackable {
 
     private Map<String, Integer> borrowers = new HashMap<>();
     private List<String> history = new ArrayList<>();
