@@ -89,13 +89,16 @@ public abstract class Equipment {
     }
 
     private void updateStatus() {
-        if (availableQuantity == totalQuantity) {
-            status = "AVAILABLE";
-        } else if (availableQuantity > 0) {
-            status = "PARTIALLY AVAILABLE";
-        } else if (damagedQuantity > 0) {
+        if (damagedQuantity > 0) {
             status = "DAMAGED";
-        } else {
+        }
+        else if (availableQuantity == totalQuantity) {
+            status = "AVAILABLE";
+        }
+        else if (availableQuantity > 0) {
+            status = "PARTIALLY AVAILABLE";
+        }
+        else {
             status = "IN USE";
         }
     }

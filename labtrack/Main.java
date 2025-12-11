@@ -34,7 +34,7 @@ public class Main {
 
         int choice = -1;
         do {
-            currentUser.showMenu(); // Polymorphic call!
+            currentUser.showMenu();
 
             try {
                 choice = Integer.parseInt(scanner.nextLine());

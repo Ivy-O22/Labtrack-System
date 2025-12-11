@@ -57,12 +57,6 @@ public class TrackableEquipment extends Equipment implements Trackable {
                 return false;
             }
 
-            // Validate user name format (letters, spaces, and hyphens only)
-            if (!user.matches("^[a-zA-Z\\s-]+$")) {
-                System.out.println("Error: User name must contain only letters, spaces, and hyphens.");
-                return false;
-            }
-
             if (date == null || date.trim().isEmpty()) {
                 System.out.println("Error: Date cannot be null or empty.");
                 return false;
@@ -102,12 +96,6 @@ public class TrackableEquipment extends Equipment implements Trackable {
             // Validate inputs
             if (user == null || user.trim().isEmpty()) {
                 System.out.println("Error: User name cannot be null or empty.");
-                return false;
-            }
-
-            // Validate user name format (letters, spaces, and hyphens only)
-            if (!user.matches("^[a-zA-Z\\s-]+$")) {
-                System.out.println("Error: User name must contain only letters, spaces, and hyphens.");
                 return false;
             }
 
@@ -157,12 +145,6 @@ public class TrackableEquipment extends Equipment implements Trackable {
             // Validate inputs
             if (user == null || user.trim().isEmpty()) {
                 System.out.println("Error: User name cannot be null or empty.");
-                return false;
-            }
-
-            // Validate user name format (letters, spaces, and hyphens only)
-            if (!user.matches("^[a-zA-Z\\s-]+$")) {
-                System.out.println("Error: User name must contain only letters, spaces, and hyphens.");
                 return false;
             }
 
