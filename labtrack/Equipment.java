@@ -35,9 +35,7 @@ public abstract class Equipment {
     public String getName() { return name; }
     public String getCategory() { return category; }
     public String getStatus() { return status; }
-    public int getTotalQuantity() { return totalQuantity; }
     public int getAvailableQuantity() { return availableQuantity; }
-    public int getDamagedQuantity() { return damagedQuantity; }
 
     public void increaseStock(int amount) {
         if (amount <= 0) {

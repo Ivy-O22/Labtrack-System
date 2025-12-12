@@ -181,7 +181,7 @@ public class InventoryActions {
 
         try {
             for (TrackableEquipment eq : manager.getAllEquipment()) {
-                // equalsIgnoreCase allows "Microscope" to match "microscope"
+                // equalsIgnoreCase
                 if (eq.getName().equalsIgnoreCase(name)) {
                     return eq;
                 }
